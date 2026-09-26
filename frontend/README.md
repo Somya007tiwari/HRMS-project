@@ -1,71 +1,161 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) and extended with:
+# HRMS Frontend
 
-- Redux Toolkit (`@reduxjs/toolkit`, `react-redux`)
-- React Context session provider
-- Zustand store (`stores/uiStore.ts`)
-- Apollo Client (`@apollo/client`, `graphql`) with auth and error links
-- Frontend authentication flow (login, token storage, middleware guard)
+The frontend of the Human Resource Management System (HRMS) is built with **Next.js, React, and TypeScript**. It provides the user interface for authentication, employee-related operations, HR workflows, and role-based access.
 
-## Getting Started
+## 🛠️ Tech Stack
 
-1) Create environment file:
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Redux Toolkit
+- React Context
+- Zustand
+- Apollo Client
+- GraphQL
+- JWT Authentication
 
+## 📁 Project Structure
+
+```text
+frontend/
+├── app/
+├── components/
+├── context/
+├── graphql/
+├── lib/
+├── public/
+├── store/
+├── stores/
+├── middleware.ts
+├── next.config.ts
+├── package.json
+└── tsconfig.json
 ```
-# .env.local
-NEXT_PUBLIC_API_BASE_URL=https://api.example.com
-NEXT_PUBLIC_GRAPHQL_URL=https://api.example.com/graphql
+
+### `app/`
+
+Contains application pages, layouts, and routes.
+
+### `components/`
+
+Contains reusable UI components.
+
+### `context/`
+
+Contains React Context providers used across the application.
+
+### `graphql/`
+
+Contains GraphQL queries, mutations, and related configuration.
+
+### `lib/`
+
+Contains reusable application utilities and authentication services.
+
+### `store/`
+
+Contains Redux Toolkit store configuration and application state.
+
+### `stores/`
+
+Contains Zustand stores used for UI and other client-side state.
+
+### `middleware.ts`
+
+Handles route protection and redirects unauthenticated users to the login page.
+
+## 🔐 Authentication
+
+The frontend implements an authentication flow using JWT tokens.
+
+The authentication system includes:
+
+- Login
+- Token storage
+- Protected routes
+- Role-based access
+- Authorization headers
+- Authentication middleware
+- Token refresh handling
+
+## ⚙️ Environment Variables
+
+Create the required environment file in the frontend directory.
+
+Example:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:<backend-port>
+NEXT_PUBLIC_GRAPHQL_URL=http://localhost:<graphql-port>/graphql
 ```
 
-2) Install dependencies:
+Use the actual ports configured in your backend environment.
+
+> Do not commit secret keys, tokens, passwords, or other sensitive credentials to GitHub.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure the following are installed:
+
+- Node.js
+- npm
+- Git
+- Backend API running locally
+
+### Install Dependencies
+
+From the `frontend` directory:
 
 ```bash
 npm install
 ```
 
-3) Run the development server:
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The frontend will normally be available at:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser.
+```text
+http://localhost:3000
+```
 
-### Auth Flow
-- Visit `/login` to authenticate. On success, an access token is stored in memory/localStorage and a non-HttpOnly cookie `auth_token` is set so `middleware.ts` can protect routes at the edge.
-- API base URL and GraphQL URL come from `NEXT_PUBLIC_API_BASE_URL` and `NEXT_PUBLIC_GRAPHQL_URL`.
-- Apollo Client automatically attaches the `Authorization: Bearer <token>` header when available and attempts a silent refresh on GraphQL `UNAUTHENTICATED` errors.
+Open the URL in your browser to access the application.
 
-### Key Files
-- `app/providers.tsx`: Wires Redux, Apollo, Session context.
-- `lib/auth/tokenStorage.ts`: Access/refresh token storage and silent refresh.
-- `lib/auth/authService.ts`: `loginWithPassword`, `logout`, and `fetchWithAuth`.
-- `lib/apolloClient.ts`: Apollo Client with auth and error links, caching.
-- `middleware.ts`: Redirects to `/login` when unauthenticated.
-- `store/*`: Redux Toolkit auth slice and store.
-- `stores/uiStore.ts`: Example Zustand store.
-- `app/(auth)/login/page.tsx`: Login page.
+## 🏗️ Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a production build using:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the production server with:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔗 Backend Integration
 
-## Deploy on Vercel
+The frontend communicates with the ASP.NET Core backend through configured API and GraphQL endpoints.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Apollo Client is used for GraphQL communication and handles authentication-related headers and errors.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📌 Development Notes
+
+- Keep environment-specific configuration in environment files.
+- Do not commit sensitive credentials.
+- Follow the existing component and folder structure when adding features.
+- Reuse existing components and state-management patterns where possible.
+
+## 👩‍💻 Author
+
+**Somya Tiwari**
+
+B.Tech Computer Science Engineering
